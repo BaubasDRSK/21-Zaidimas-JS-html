@@ -92,7 +92,7 @@ if (timerTime <= 0){
     clearInterval(timerInterval);
     clearTimeout(flyinInterval);
     square.style.display='none';
-    timerTime = 50;
+    timerTime = 300;
     roundEnd();
 }
 }
