@@ -103,7 +103,7 @@ if (timerTime <= 0){
 
 buttonOk.addEventListener("click", ()=>{
     document.getElementById('info').style.display = 'none';
-    timerInterval = setInterval(timeDownCounter, 10);
+    timerInterval = setInterval(timeDownCounter, 100);
     puttFlyingObjectInRandomPlace();
     flyinInterval =  setTimeout(timerRunOut, changeInterval);
 });
