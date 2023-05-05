@@ -32,10 +32,10 @@ function randomMinMax(min, max) {
   }
 
 
-function timerOut(){
+function timerRunOut(){
     rezultComputer++;
     puttFlyingObjectInRandomPlace();
-    flyinInterval =  setTimeout(timerOut, 1000);
+    flyinInterval =  setTimeout(timerRunOut, 1000);
 }
 
 function puttFlyingObjectInRandomPlace(){
@@ -49,32 +49,35 @@ function puttFlyingObjectInRandomPlace(){
 
 
 function roundEnd() {
+    
     if (rezultHuman > rezultComputer){ 
-        winner = "Zmogus";
         overall[round-1]=1;
+        winner = "Zmogus -> "  + overall.filter(x => x===1).length + " Laimejimu";
     } else if(rezultHuman == rezultComputer) {
-        winner = "Lygiosios";
         overall[round-1]=0;
+        winner = "Lygiosios -> "+ overall.filter(x => x===0).length + " Lygiuju";
     } else {
-        winner = "Kompiuteris"
         overall[round-1]=-1;
+        winner = "Kompiuteris -> " + overall.filter(x => x===-1).length + " Laimejimu";
     };
 
-    rezults += `Roundas: ${round} > Zmogus: ${rezultHuman} - Kompiuteris: ${rezultComputer}. NUGALETOJAS: ${winner} \n\r`;
+    console.log(overall);
+
+    rezults += `Roundas: ${round} > Zmg: ${rezultHuman} - PC: ${rezultComputer}. NUGALETOJAS: ${winner} \n\r`;
     document.getElementById('info').style.display = 'flex';
     infoText.innerText = rezults;
     rezultComputer = 0;
     rezultHuman = 0;
-    if (round >= 3){
+
+    if (round >= 10){
         if (overall.reduce((a,b)=>a+b)>0){
             finalist = 'ZMOGUS';
-        } else if(overall.reduce((a,b)=>a+b)=0){
+        } else if(overall.reduce((a,b)=>a+b)===0){
             finalist = 'LYGIOSIOS';
         } else {
             finalist = 'KOMPIUTERIS';
         }
-        infoText.innerText = rezults + "Žaidimas baigtas. \n\r Matcho nugaletojas: " + finalist ; //suskaiciuoti galutini laimetoja
-
+        infoText.innerText = rezults + "Žaidimas baigtas. \n\r Matcho nugaletojas: " + finalist ; 
         round = 1;
         rezults = '';
         overall = [];
@@ -84,11 +87,11 @@ function roundEnd() {
     
 }
    
-function timerF(){
-timerObject.innerText = `${Math.floor(timerTime/10)} : ${timerTime%10}`;
+function timeDownCounter(){
+timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> ${Math.floor(timerTime/10)} : ${timerTime%10} <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
 timerTime --;
 if (timerTime <= 0){
-    timerObject.innerText = `0 : 0`;
+    timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> 0 : 0 <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
     clearInterval(timerInterval);
     clearTimeout(flyinInterval);
     square.style.display='none';
@@ -100,9 +103,9 @@ if (timerTime <= 0){
 
 buttonOk.addEventListener("click", ()=>{
     document.getElementById('info').style.display = 'none';
-    timerInterval = setInterval(timerF, 100);
+    timerInterval = setInterval(timeDownCounter, 10);
     puttFlyingObjectInRandomPlace();
-    flyinInterval =  setTimeout(timerOut, changeInterval);
+    flyinInterval =  setTimeout(timerRunOut, changeInterval);
 });
 
 
@@ -112,7 +115,7 @@ flyingObject.addEventListener("click", ()=>{
     rezultComputer=rezultComputer;
     clearTimeout(flyinInterval);
     puttFlyingObjectInRandomPlace();
-    flyinInterval =  setTimeout(timerOut, 1000);  //
+    flyinInterval =  setTimeout(timerRunOut, 1000);  //
 });  
 
 
