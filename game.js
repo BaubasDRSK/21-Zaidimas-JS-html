@@ -85,10 +85,10 @@ function roundEnd() {
 }
    
 function timeDownCounter(){
-    timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> ${Math.floor(timerTime/10)} : ${timerTime%10} <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
+    timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round} / ${roundsCount}</span> <br> ${Math.floor(timerTime/10)} : ${timerTime%10} <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
     timerTime --;
     if (timerTime <= 0){
-        timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> 0 : 0 <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
+        timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round} / ${roundsCount}</span> <br> 0 : 0 <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
         clearInterval(timerInterval);
         clearTimeout(flyinInterval);
         square.style.display='none';
