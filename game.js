@@ -40,8 +40,7 @@ function puttFlyingObjectInRandomPlace(){
 }
 
 
-
-function roundEnd() {
+function whoIsWinner(){
     if (rezultHuman > rezultComputer){ 
         overall[round-1]=1;
         winner = "Zmogus -> "  + overall.filter(x => x===1).length + " Laimejimu";
@@ -52,19 +51,29 @@ function roundEnd() {
         overall[round-1]=-1;
         winner = "Kompiuteris -> " + overall.filter(x => x===-1).length + " Laimejimu";
     };
-    rezults += `Roundas: ${round} > Zmg: ${rezultHuman} - PC: ${rezultComputer}. NUGALETOJAS: ${winner} \n\r`;
-    document.getElementById('info-wrapper').style.display = 'flex';
-    infoText.innerText = rezults;
-    rezultComputer = 0;
-    rezultHuman = 0;
-    if (round >= roundsCount){
-        if (overall.reduce((a,b)=>a+b)>0){
+}
+
+function whoIsWinnerAfterAll() {
+    if (overall.reduce((a,b)=>a+b)>0){
             finalist = 'ZMOGUS';
         } else if(overall.reduce((a,b)=>a+b)===0){
             finalist = 'LYGIOSIOS';
         } else {
             finalist = 'KOMPIUTERIS';
         }
+}
+
+
+
+function roundEnd() {
+    whoIsWinner();
+    rezults += `Roundas: ${round} > Zmg: ${rezultHuman} - PC: ${rezultComputer}. NUGALETOJAS: ${winner} \n\r`;
+    document.getElementById('info-wrapper').style.display = 'flex';
+    infoText.innerText = rezults;
+    rezultComputer = 0;
+    rezultHuman = 0;
+    if (round >= roundsCount){
+        whoIsWinnerAfterAll();
         infoText.innerText = rezults + "Žaidimas baigtas. \n\r Matcho nugaletojas: " + finalist ; 
         round = 1;
         rezults = '';
