@@ -15,7 +15,8 @@
     <div class="kaimas"></div>
     <div class="timer" id="timer"></div>
     <div class="result" id="result"></div>
-    <div class="wrapper">
+
+    <div class="info-wrapper" id="info-wrapper">
         <div class="info" id="info">
             <div class="text-wrapper">
                 <p class="info-text" id="info-text">Spauskite OK, kad pradeti zaidima</p>
@@ -23,32 +24,68 @@
             <button id="ok">OK</button>
         </div>
     </div>
+
+    <div class="start-wrapper" id="start-wrapper">
+        <div class="start-info">
+            <div class="logo-wrapper">
+                <div class="side-rooster">
+                    <img src="./img/rooster-left.webp" alt="">
+                </div>
+                <div class="logo">
+                    <img src="./img/ctr-logo.svg" alt="logo">
+                </div>
+                <div class="side-rooster">
+                    <img src="./img/rooster-right.webp" alt="">
+                </div>
+            </div>
+            <div class="game-info">
+                <p class="game-info-text">
+                    Welcome to the fast-paced and exciting game of "Catch the rooster"!
+                    In this game, your goal is to click on the roosters that appear on the screen as quickly as possible. But beware, these roosters are quick and will constantly be moving around, so you'll need to keep your wits about you if you want to win big.
+                    Each time you successfully hit a rooster, you'll earn points that will add up over time. But be careful - if you're too slow or miss the rooster entirely, the computer will swoop in and steal your potential points.
+                    So get ready to ruffle some feathers and show off your lightning-fast reflexes. Are you up for the challenge of "Rooster Ruckus"? Let's find out!
+                </p>
+            </div>
+            <div class="rooster-size-wrapper">
+                <form>
+                    <label for="rooster-size">Select rooster size</label>
+                    <input type="range" id="rooster-size" value="20">
+                </form>
+                <img class="rooster-size-image" src="./gaidys.png" alt="rooster">
+            </div>
+            <div class="round-setup">
+                <div class="round-time">
+                    <form>
+                        <label for="round-time">Round interval(s):</label>
+                        <select id="round-time" name="rount-time">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20" selected>20</option>
+                          <option value="25">25</option>
+                          <option value="30">30</option>
+                        </select>
+                      </form>
+                </div>
+                <div class="round-count">
+                    <form>
+                        <label for="rounds-count">How many rounds:</label>
+                        <select id="rounds-count" name="rounds-count">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="5"selected>5</option>
+                          <option value="10">10</option>
+                        </select>
+                      </form>
+                </div>
+            </div>
+            <div class="btn-start" id="btn-start">
+                START
+            </div>
+
+        </div>
+    </div>
     <div class="square" id="square"></div>
     <script src="./game.js" type="module" defer></script>
 </body>
 </html>
-
-
-<!-- 
-    Jeigu kam visgi reikia darbo:
-
-Sukurkite žaidimą.
-
-Žaidimą žaidžia du žaidėjai: Player (Jūs) ir Kompiuteris. n
-
-Žaidimą sudaro 10 raundų, vieno raundo trukmė 30 sekundžių. 
-
-Raundą laimi tas žaidėjas kuris surenka daugiau taškų.
-
-Kiekvieno raundo pabaigoje atvaizduokite laimėtojo vardą, surinktus taškus raunde ir visus laimėtus roundus prie žaidėjų vardų.
-
-Žaidimo esmė:
-
-Puslapyje atvaizduojamas kvadratas (50px x 50px) kuris keičia savo atsitiktinę poziciją bei savo fono spalvą kas 1 sekundę. 
-
-Jeigu žaidėjas spėja per šį laiko tarpą paspausti ant kvadrato - taškas skiriamas jam. Priešingu atveju laimi kompiuteris.
-
-Kiekviename rounde naršyklėje atvaizduokite laikmatį skaičiuojantį roundo trukmę. 
-
-Pasibaigus žaidimui atvaizduokite laimėtojo vardą bei mygtuką, ant kurio paspaudus žaidimas būtų pradedamas iš naujo.
- -->
