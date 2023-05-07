@@ -6,7 +6,6 @@ const buttonOk = document.getElementById('ok');
 const infoText = document.getElementById('info-text');
 let rezultHuman = 0;
 let rezultComputer = 0;
-let set = 0;
 let round = 1;
 let flyinInterval;
 let timerInterval;
@@ -16,8 +15,7 @@ let timerTime = 200;
 let roundTime = 200;
 let roundsCount = 5;
 let rooster_Size = 50;
-const changeInterval = 1000; //
-// let timer = 0;
+const changeInterval = 1000;
 const timerObject = document.getElementById('timer');
 let overall = [];
 let finalist = "";
@@ -44,7 +42,6 @@ function puttFlyingObjectInRandomPlace(){
 
 
 function roundEnd() {
-    
     if (rezultHuman > rezultComputer){ 
         overall[round-1]=1;
         winner = "Zmogus -> "  + overall.filter(x => x===1).length + " Laimejimu";
@@ -60,7 +57,6 @@ function roundEnd() {
     infoText.innerText = rezults;
     rezultComputer = 0;
     rezultHuman = 0;
-
     if (round >= roundsCount){
         if (overall.reduce((a,b)=>a+b)>0){
             finalist = 'ZMOGUS';
@@ -77,20 +73,19 @@ function roundEnd() {
         return;
     }
     round++;
-    
 }
    
 function timeDownCounter(){
-timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> ${Math.floor(timerTime/10)} : ${timerTime%10} <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
-timerTime --;
-if (timerTime <= 0){
-    timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> 0 : 0 <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
-    clearInterval(timerInterval);
-    clearTimeout(flyinInterval);
-    square.style.display='none';
-    timerTime = roundTime;
-    roundEnd();
-}
+    timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> ${Math.floor(timerTime/10)} : ${timerTime%10} <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
+    timerTime --;
+    if (timerTime <= 0){
+        timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round}</span> <br> 0 : 0 <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
+        clearInterval(timerInterval);
+        clearTimeout(flyinInterval);
+        square.style.display='none';
+        timerTime = roundTime;
+        roundEnd();
+    }
 }  
 
 function buttonOkClicked() {
@@ -110,7 +105,6 @@ function buttonOkClicked() {
     timerTime = roundTime;
     }
 };
-
 buttonOk.addEventListener("click", buttonOkClicked);
 
 function theTargetWasClicked() {
@@ -122,26 +116,22 @@ function theTargetWasClicked() {
     flyinInterval =  setTimeout(timerRunOut, 1000);
 
 };
-
 flyingObject.addEventListener("click", theTargetWasClicked);
 
 function roosterSize(){
     rooster_Size = document.getElementById("rooster-size").value * 1.2 +30;
     document.documentElement.style.setProperty('--rooster-size', rooster_Size + "px");
 }
-
 document.getElementById('rooster-size').addEventListener('input', roosterSize);
 
 function roundInterval() {
     roundTime = document.getElementById("round-time").value*10;
 }
-
 document.getElementById('round-time').addEventListener('input', roundInterval);
 
 function howManyRound(){
     roundsCount = document.getElementById("rounds-count").value;
 }
-
 document.getElementById('rounds-count').addEventListener('input', howManyRound);
 
 const btnStart=document.getElementById('btn-start');
