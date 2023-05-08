@@ -20,6 +20,9 @@ const timerObject = document.getElementById('timer');
 let overall = [];
 let finalist = "";
 let isItend = false;
+let isGameRunning = false;
+let gameIsPaused = false;
+let game_Reset = false;
 
 
 
@@ -33,10 +36,10 @@ function puttFlyingObjectInRandomPlace(){
     const viewWidth = document.body.clientWidth;
     const viewHeight = document.body.clientHeight;
     const positionX = randomMinMax(0, (viewWidth-rooster_Size));
-    const positionY = randomMinMax(0, (viewHeight-rooster_Size));
-    square.style.setProperty('--top', positionY + 'px');
-    square.style.setProperty('--left', positionX  + 'px');
-    square.style.display='block';
+    const positionY = randomMinMax(0, (viewHeight-rooster_Size-50));
+    flyingObject.style.setProperty('--top', positionY + 'px');
+    flyingObject.style.setProperty('--left', positionX  + 'px');
+    flyingObject.style.display='block';
 }
 
 
@@ -63,8 +66,6 @@ function whoIsWinnerAfterAll() {
         }
 }
 
-
-
 function roundEnd() {
     whoIsWinner();
     rezults += `Roundas: ${round} > Zmg: ${rezultHuman} - PC: ${rezultComputer}. NUGALETOJAS: ${winner} \n\r`;
@@ -75,6 +76,10 @@ function roundEnd() {
     if (round >= roundsCount){
         whoIsWinnerAfterAll();
         infoText.innerText = rezults + "Žaidimas baigtas. \n\r Matcho nugaletojas: " + finalist ; 
+        if (game_Reset === true){
+            infoText.innerText = "Žaidimas nutrauktas. Pradėkite žaidimą išnaujo.";
+            game_Reset = true;
+        }
         round = 1;
         rezults = '';
         overall = [];
@@ -82,6 +87,9 @@ function roundEnd() {
         return;
     }
     round++;
+    isGameRunning = false;
+    document.getElementById('btn-pause-play').style.display="none";
+    document.getElementById('btn-reset').style.display="none";
 }
    
 function timeDownCounter(){
@@ -91,9 +99,13 @@ function timeDownCounter(){
         timerObject.innerHTML = `<span style="font-size:20px; display:inline-block">Roundas ${round} / ${roundsCount}</span> <br> 0 : 0 <br> <span style="font-size:20px; display:inline-block"> Žmg: ${rezultHuman} / PC: ${rezultComputer}</span> <br>`;
         clearInterval(timerInterval);
         clearTimeout(flyinInterval);
-        square.style.display='none';
+        flyingObject.style.display='none';
         timerTime = roundTime;
         roundEnd();
+        isGameRunning = false;
+        document.getElementById('btn-pause-play').style.display="none";
+        document.getElementById('btn-reset').style.display="none";
+
     }
 }  
 
@@ -105,6 +117,9 @@ function buttonOkClicked() {
         timerObject.style.display = 'none';
 
     } else {
+    isGameRunning = true;
+    document.getElementById('btn-pause-play').style.display="block";
+    document.getElementById('btn-reset').style.display="block";
     timerObject.style.display = 'block';
     document.getElementById("start-wrapper").style.display = 'none';
     document.getElementById('info-wrapper').style.display = 'none';
@@ -123,7 +138,6 @@ function theTargetWasClicked() {
     clearTimeout(flyinInterval);
     puttFlyingObjectInRandomPlace();
     flyinInterval =  setTimeout(timerRunOut, 1000);
-
 };
 flyingObject.addEventListener("click", theTargetWasClicked);
 
@@ -145,3 +159,49 @@ document.getElementById('rounds-count').addEventListener('input', howManyRound);
 
 const btnStart=document.getElementById('btn-start');
 btnStart.addEventListener("click", buttonOkClicked);
+
+function gamePaused(){
+    if(isGameRunning){
+    clearTimeout(flyinInterval);
+    clearInterval(timerInterval);
+    flyingObject.style.display='none';
+    }
+};
+
+
+function gameResumed(){
+    if(isGameRunning){
+    timerInterval = setInterval(timeDownCounter, 100);
+    puttFlyingObjectInRandomPlace();
+    flyinInterval =  setTimeout(timerRunOut, changeInterval);
+    flyingObject.style.display='block';
+    }
+};
+
+window.addEventListener("blur", gamePaused);
+window.addEventListener("focus", gameResumed);
+
+function buttonPausePlayClicked() {
+    if (gameIsPaused){
+        gameIsPaused = false;
+        gameResumed()
+        pause_play_button.innerText="Pause"
+
+    } else {
+        gameIsPaused = true;
+        gamePaused()
+        pause_play_button.innerText="Play"
+    }
+
+}
+const pause_play_button = document.getElementById('btn-pause-play');
+pause_play_button.addEventListener("click", buttonPausePlayClicked);
+
+function gameReset(){
+    game_Reset = true;
+    round = roundsCount;
+    timerTime = 0;
+    timeDownCounter();  
+};
+
+document.getElementById('btn-reset').addEventListener("click", gameReset);

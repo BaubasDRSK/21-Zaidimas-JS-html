@@ -211,6 +211,7 @@ img {
   padding: 15px 35px 15px 35px;
   text-decoration: none;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .btn-start:hover {
@@ -221,4 +222,20 @@ img {
   background-image: -o-linear-gradient(top, #f22727, #ffbf00);
   background-image: linear-gradient(to bottom, #f22727, #ffbf00);
   text-decoration: none;
+}
+
+.btn-pause-play{
+  position: absolute;
+  bottom: 20px;
+  right:20px;
+  font-size: 14px;
+  display: none;
+}
+
+.btn-reset{
+  position: absolute;
+  bottom: 20px;
+  right: 140px;
+  font-size: 14px;
+  display: none;
 }
