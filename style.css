@@ -157,10 +157,19 @@ img {
   height: 140px;
   overflow-y: scroll;
   margin-bottom: 20px;
+  padding: 15px;
+  border: 1px dotted black;
+  border-radius: 8px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.game-info::-webkit-scrollbar {
+  display: none;
 }
 
 .game-info-text{
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .rooster-size-wrapper{
