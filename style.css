@@ -21,7 +21,7 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
 body{
   width: 100vw;
   height: 100vh;
-  background-image:url(./dangus.png);
+  background-image:url(./dangus.webp);
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -39,7 +39,7 @@ img {
 .kaimas{
     position: relative;
     z-index: -1;
-    background-image: url(./kaimas.png);
+    background-image: url(./kaimas.webp);
     background-size: contain;
     background-position: center bottom -20px;
     background-repeat: no-repeat;
@@ -65,7 +65,7 @@ img {
     position:absolute;
     top:var(--top);
     left:var(--left);
-    background-image: url(./gaidys.png);
+    background-image: url(./gaidys.webp);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
