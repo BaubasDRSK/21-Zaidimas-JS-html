@@ -25,6 +25,16 @@ let gameIsPaused = false;
 let game_Reset = false;
 
 
+function resizeHtmlBody(){
+    const vh = window.innerHeight;
+    const vw = window.innerWidth;
+    document.documentElement.style.setProperty('--vh', vh + "px");
+    document.documentElement.style.setProperty('--vw', vw + "px");
+};
+
+resizeHtmlBody();
+window.addEventListener('resize', resizeHtmlBody);
+window.addEventListener('orientationchange', resizeHtmlBody);
 
 function timerRunOut(){
     rezultComputer++;
